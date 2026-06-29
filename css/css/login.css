@@ -1,0 +1,135 @@
+/* Login Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 420px;
+}
+
+.login-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo-circle {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+}
+
+.logo-circle i {
+    font-size: 35px;
+    color: white;
+}
+
+.login-header h2 {
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.login-header p {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #555;
+    font-size: 0.85rem;
+}
+
+.form-control,
+.form-select {
+    border-radius: 10px;
+    padding: 12px 15px;
+    border: 2px solid #e8e8e8;
+    transition: all 0.3s;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+.btn-login {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* Alertas */
+.alert {
+    border-radius: 10px;
+    border: none;
+    padding: 12px 15px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.alert-danger {
+    background-color: #fff5f5;
+    color: #e74a3b;
+}
+
+.alert-success {
+    background-color: #f0fff4;
+    color: #1cc88a;
+}
