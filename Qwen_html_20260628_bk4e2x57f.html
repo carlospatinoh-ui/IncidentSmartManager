@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IncidentSmartManager - Iniciar Sesión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo-circle">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h2>IncidentSmartManager</h2>
+                <p class="text-muted">Sistema de Gestión de Incidentes</p>
+            </div>
+            <form id="loginForm">
+                <div class="mb-3">
+                    <label class="form-label"><i class="fas fa-user me-2"></i>Usuario</label>
+                    <input type="text" class="form-control" id="username" placeholder="Ingrese su usuario" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><i class="fas fa-lock me-2"></i>Contraseña</label>
+                    <input type="password" class="form-control" id="password" placeholder="Ingrese su contraseña" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><i class="fas fa-user-tag me-2"></i>Rol</label>
+                    <select class="form-select" id="role">
+                        <option value="admin">Administrador</option>
+                        <option value="tecnico">Técnico</option>
+                        <option value="usuario">Usuario</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 btn-login">
+                    <i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión
+                </button>
+            </form>
+            <div class="login-footer">
+                <small class="text-muted">Usuarios de prueba: admin/admin, tecnico/tecnico, usuario/usuario</small>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

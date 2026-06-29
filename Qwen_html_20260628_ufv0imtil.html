@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle Incidente - IncidentSmartManager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="css/estilos.css" rel="stylesheet">
+    <link href="css/dashboard.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-shield-alt"></i>
+            <span>ISM</span>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link active" href="incidentes.html"><i class="fas fa-exclamation-triangle"></i> Incidentes</a></li>
+            <li class="nav-item"><a class="nav-link" href="registrar.html"><i class="fas fa-plus-circle"></i> Registrar Incidente</a></li>
+            <li class="nav-item" id="navUsuarios"><a class="nav-link" href="usuarios.html"><i class="fas fa-users"></i> Usuarios</a></li>
+            <li class="nav-item"><a class="nav-link" href="reportes.html"><i class="fas fa-chart-bar"></i> Reportes</a></li>
+            <li class="nav-item mt-auto"><a class="nav-link" href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <nav class="top-navbar">
+            <div class="d-flex align-items-center">
+                <button class="btn btn-link" id="toggleSidebar"><i class="fas fa-bars"></i></button>
+                <h4 class="mb-0 ms-3">Detalle del Incidente</h4>
+            </div>
+            <div class="d-flex align-items-center">
+                <span class="me-3"><i class="fas fa-user-circle me-1"></i><span id="userName">Usuario</span></span>
+            </div>
+        </nav>
+
+        <div class="container-fluid p-4">
+            <div class="row">
+                <!-- Información del incidente -->
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5><i class="fas fa-info-circle me-2"></i>Información del Incidente</h5>
+                            <span class="badge" id="detailStatus"></span>
+                        </div>
+                        <div class="card-body">
+                            <h4 id="detailTitle"></h4>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <strong>Categoría:</strong>
+                                    <p id="detailCategory"></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <strong>Prioridad:</strong>
+                                    <p id="detailPriority"></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <strong>Sistema afectado:</strong>
+                                    <p id="detailSystem"></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <strong>Asignado a:</strong>
+                                    <p id="detailAssigned"></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <strong>Ubicación:</strong>
+                                    <p id="detailLocation"></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <strong>Fecha de creación:</strong>
+                                    <p id="detailDate"></p>
+                                </div>
+                            </div>
+                            <hr>
+                            <strong>Descripción:</strong>
+                            <p id="detailDescription" class="mt-2"></p>
+                            <strong>Evidencias:</strong>
+                            <p id="detailEvidence" class="mt-2 text-muted"></p>
+                        </div>
+                    </div>
+
+                    <!-- Actualizar estado -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5><i class="fas fa-edit me-2"></i>Actualizar Estado</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">Nuevo estado</label>
+                                    <select class="form-select" id="updateStatus">
+                                        <option value="abierto">Abierto</option>
+                                        <option value="en_proceso">En Proceso</option>
+                                        <option value="resuelto">Resuelto</option>
+                                        <option value="cerrado">Cerrado</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Reasignar a</label>
+                                    <select class="form-select" id="updateAssigned">
+                                        <option value="">Sin asignar</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Comentario</label>
+                                    <input type="text" class="form-control" id="updateComment" placeholder="Nota de seguimiento...">
+                                </div>
+                            </div>
+                            <button class="btn btn-primary mt-3" onclick="updateIncidentStatus()">
+                                <i class="fas fa-save me-1"></i> Actualizar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Historial -->
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-history me-2"></i>Historial</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="timeline" id="incidentTimeline">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="incidentes.html" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-1"></i> Volver a Incidentes
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/incidentes.js"></script>
+</body>
+</html>
