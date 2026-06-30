@@ -19,32 +19,32 @@
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link active" href="dashboard.html">
-                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                    <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="incidentes.html">
-                    <i class="fas fa-exclamation-triangle"></i> Incidentes
+                    <i class="fas fa-exclamation-triangle"></i> <span>Incidentes</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="registrar.html">
-                    <i class="fas fa-plus-circle"></i> Registrar Incidente
+                    <i class="fas fa-plus-circle"></i> <span>Registrar</span>
                 </a>
             </li>
             <li class="nav-item" id="navUsuarios">
                 <a class="nav-link" href="usuarios.html">
-                    <i class="fas fa-users"></i> Usuarios
+                    <i class="fas fa-users"></i> <span>Usuarios</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="reportes.html">
-                    <i class="fas fa-chart-bar"></i> Reportes
+                    <i class="fas fa-chart-bar"></i> <span>Reportes</span>
                 </a>
             </li>
             <li class="nav-item mt-auto">
                 <a class="nav-link" href="#" onclick="logout()">
-                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    <i class="fas fa-sign-out-alt"></i> <span>Salir</span>
                 </a>
             </li>
         </ul>
@@ -52,27 +52,25 @@
 
     <!-- Main Content -->
     <div class="main-content">
-        <!-- Top Navbar -->
         <nav class="top-navbar">
             <div class="d-flex align-items-center">
-                <button class="btn btn-link" id="toggleSidebar">
+                <button class="btn btn-link p-1" id="toggleSidebar">
                     <i class="fas fa-bars"></i>
                 </button>
-                <h4 class="mb-0 ms-3">Dashboard</h4>
+                <h4 class="ms-2">Dashboard</h4>
             </div>
             <div class="d-flex align-items-center">
-                <span class="me-3" id="userInfo">
+                <span class="me-2" style="font-size:0.85rem;">
                     <i class="fas fa-user-circle me-1"></i>
                     <span id="userName">Usuario</span>
-                    <span class="badge bg-primary ms-1" id="userRole">Rol</span>
+                    <span class="badge bg-primary ms-1" id="userRole" style="font-size:0.7rem;">Rol</span>
                 </span>
-                <img src="img/avatar.png" alt="Avatar" class="avatar-img" onerror="this.style.display='none'">
             </div>
         </nav>
 
-        <!-- KPIs -->
-        <div class="container-fluid p-4">
-            <div class="row g-4 mb-4">
+        <div class="container-fluid p-3">
+            <!-- KPIs -->
+            <div class="row g-3 mb-3">
                 <div class="col-xl-3 col-md-6">
                     <div class="kpi-card kpi-total">
                         <div class="kpi-icon"><i class="fas fa-folder-open"></i></div>
@@ -111,8 +109,8 @@
                 </div>
             </div>
 
-            <!-- Charts Row -->
-            <div class="row g-4 mb-4">
+            <!-- Charts -->
+            <div class="row g-3 mb-3">
                 <div class="col-lg-6">
                     <div class="card chart-card">
                         <div class="card-header">
@@ -143,9 +141,9 @@
                             <h5><i class="fas fa-list me-2"></i>Incidentes Recientes</h5>
                             <a href="incidentes.html" class="btn btn-sm btn-outline-primary">Ver todos</a>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body p-0">
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table class="table table-hover mb-0">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -155,8 +153,7 @@
                                             <th>Fecha</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="recentIncidents">
-                                    </tbody>
+                                    <tbody id="recentIncidents"></tbody>
                                 </table>
                             </div>
                         </div>
