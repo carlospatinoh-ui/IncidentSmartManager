@@ -5,27 +5,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function loadDashboard() {
     const stats = db.getStats();
-
     document.getElementById('kpiTotal').textContent = stats.total;
     document.getElementById('kpiAbiertos').textContent = stats.abiertos;
     document.getElementById('kpiProceso').textContent = stats.enProceso;
     document.getElementById('kpiCerrados').textContent = stats.resueltos + stats.cerrados;
-
     loadCharts(stats);
     loadRecentIncidents();
 }
 
 function loadCharts(stats) {
-    // Gráfica de estados
-    const ctxEstado = document.getElementById('chartEstado').getContext('2d');
-    new Chart(ctxEstado, {
+    // Gráfica Estado - Compacta
+    new Chart(document.getElementById('chartEstado'), {
         type: 'doughnut',
         data: {
-            labels: ['Abiertos', 'En Proceso', 'Resueltos', 'Cerrados'],
+            labels: ['Abiertos', 'Proceso', 'Resueltos', 'Cerrados'],
             datasets: [{
                 data: [stats.abiertos, stats.enProceso, stats.resueltos, stats.cerrados],
                 backgroundColor: ['#e74a3b', '#f6c23e', '#1cc88a', '#858796'],
-                borderWidth: 2,
+                borderWidth: 1,
                 borderColor: '#fff'
             }]
         },
@@ -35,20 +32,25 @@ function loadCharts(stats) {
             plugins: {
                 legend: {
                     position: 'bottom',
-                    labels: { font: { size: 11 }, padding: 10 }
+                    labels: { 
+                        font: { size: 10 },
+                        padding: 8,
+                        boxWidth: 12
+                    }
                 }
+            },
+            layout: {
+                padding: { top: 10, bottom: 10 }
             }
         }
     });
 
-    // Gráfica de prioridades
-    const ctxPrioridad = document.getElementById('chartPrioridad').getContext('2d');
-    new Chart(ctxPrioridad, {
+    // Gráfica Prioridad - Compacta
+    new Chart(document.getElementById('chartPrioridad'), {
         type: 'bar',
         data: {
             labels: ['Crítica', 'Alta', 'Media', 'Baja'],
             datasets: [{
-                label: 'Incidentes',
                 data: [
                     stats.porPrioridad['critica'] || 0,
                     stats.porPrioridad['alta'] || 0,
@@ -56,7 +58,7 @@ function loadCharts(stats) {
                     stats.porPrioridad['baja'] || 0
                 ],
                 backgroundColor: ['#e74a3b', '#f6c23e', '#36b9cc', '#1cc88a'],
-                borderRadius: 6
+                borderRadius: 4
             }]
         },
         options: {
@@ -68,10 +70,12 @@ function loadCharts(stats) {
             scales: {
                 y: {
                     beginAtZero: true,
-                    ticks: { stepSize: 1, font: { size: 10 } }
+                    ticks: { stepSize: 1, font: { size: 9 } },
+                    grid: { display: false }
                 },
                 x: {
-                    ticks: { font: { size: 10 } }
+                    ticks: { font: { size: 9 } },
+                    grid: { display: false }
                 }
             }
         }
@@ -81,16 +85,15 @@ function loadCharts(stats) {
 function loadRecentIncidents() {
     const incidentes = db.getAll('incidentes');
     const tbody = document.getElementById('recentIncidents');
-
     const recientes = incidentes
         .sort((a, b) => new Date(b.fechaCreacion) - new Date(a.fechaCreacion))
         .slice(0, 5);
 
     tbody.innerHTML = recientes.map(inc => `
-        <tr style="cursor:pointer" onclick="window.location.href='detalle.html?id=${inc.id}'">
+        <tr onclick="window.location.href='detalle.html?id=${inc.id}'" style="cursor:pointer">
             <td><strong>#${inc.id}</strong></td>
-            <td>${inc.titulo}</td>
-            <td><span class="badge badge-${inc.prioridad}">${capitalize(inc.prioridad)}</span></td>
+            <td>${inc.titulo.substring(0, 30)}${inc.titulo.length > 30 ? '...' : ''}</td>
+            <td><span class="badge badge-${inc.prioridad}">${inc.prioridad}</span></td>
             <td><span class="badge badge-${inc.estado}">${formatEstado(inc.estado)}</span></td>
             <td>${formatDate(inc.fechaCreacion)}</td>
         </tr>
@@ -98,25 +101,17 @@ function loadRecentIncidents() {
 }
 
 function formatEstado(estado) {
-    const estados = {
+    return {
         'abierto': 'Abierto',
-        'en_proceso': 'En Proceso',
+        'en_proceso': 'Proceso',
         'resuelto': 'Resuelto',
         'cerrado': 'Cerrado'
-    };
-    return estados[estado] || estado;
-}
-
-function capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
+    }[estado] || estado;
 }
 
 function formatDate(dateStr) {
-    const date = new Date(dateStr);
-    return date.toLocaleDateString('es-ES', {
-        day: '2-digit',
-        month: 'short',
-        hour: '2-digit',
-        minute: '2-digit'
+    return new Date(dateStr).toLocaleDateString('es-ES', {
+        day: '2-digit', month: '2-digit',
+        hour: '2-digit', minute: '2-digit'
     });
 }
