@@ -6,21 +6,17 @@ document.addEventListener('DOMContentLoaded', function () {
 function loadDashboard() {
     const stats = db.getStats();
 
-    // Actualizar KPIs
     document.getElementById('kpiTotal').textContent = stats.total;
     document.getElementById('kpiAbiertos').textContent = stats.abiertos;
     document.getElementById('kpiProceso').textContent = stats.enProceso;
     document.getElementById('kpiCerrados').textContent = stats.resueltos + stats.cerrados;
 
-    // Cargar gráficas
     loadCharts(stats);
-
-    // Cargar incidentes recientes
     loadRecentIncidents();
 }
 
 function loadCharts(stats) {
-    // Gráfica de estados (Pie)
+    // Gráfica de estados
     const ctxEstado = document.getElementById('chartEstado').getContext('2d');
     new Chart(ctxEstado, {
         type: 'doughnut',
@@ -35,15 +31,17 @@ function loadCharts(stats) {
         },
         options: {
             responsive: true,
+            maintainAspectRatio: true,
             plugins: {
                 legend: {
-                    position: 'bottom'
+                    position: 'bottom',
+                    labels: { font: { size: 11 }, padding: 10 }
                 }
             }
         }
     });
 
-    // Gráfica de prioridades (Bar)
+    // Gráfica de prioridades
     const ctxPrioridad = document.getElementById('chartPrioridad').getContext('2d');
     new Chart(ctxPrioridad, {
         type: 'bar',
@@ -58,22 +56,22 @@ function loadCharts(stats) {
                     stats.porPrioridad['baja'] || 0
                 ],
                 backgroundColor: ['#e74a3b', '#f6c23e', '#36b9cc', '#1cc88a'],
-                borderRadius: 8
+                borderRadius: 6
             }]
         },
         options: {
             responsive: true,
+            maintainAspectRatio: true,
             plugins: {
-                legend: {
-                    display: false
-                }
+                legend: { display: false }
             },
             scales: {
                 y: {
                     beginAtZero: true,
-                    ticks: {
-                        stepSize: 1
-                    }
+                    ticks: { stepSize: 1, font: { size: 10 } }
+                },
+                x: {
+                    ticks: { font: { size: 10 } }
                 }
             }
         }
@@ -84,7 +82,6 @@ function loadRecentIncidents() {
     const incidentes = db.getAll('incidentes');
     const tbody = document.getElementById('recentIncidents');
 
-    // Ordenar por fecha (más recientes primero) y tomar los 5 primeros
     const recientes = incidentes
         .sort((a, b) => new Date(b.fechaCreacion) - new Date(a.fechaCreacion))
         .slice(0, 5);
@@ -119,7 +116,6 @@ function formatDate(dateStr) {
     return date.toLocaleDateString('es-ES', {
         day: '2-digit',
         month: 'short',
-        year: 'numeric',
         hour: '2-digit',
         minute: '2-digit'
     });
