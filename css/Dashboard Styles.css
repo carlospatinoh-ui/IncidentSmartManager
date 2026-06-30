@@ -1,11 +1,29 @@
-/* Dashboard Styles */
+/* Dashboard Styles - Versión Compacta */
+
+:root {
+    --primary: #4e73df;
+    --primary-dark: #3a5bb8;
+    --sidebar-width: 220px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #f0f2f5;
+    font-size: 14px;
+}
 
 /* Sidebar */
 .sidebar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 250px;
+    width: var(--sidebar-width);
     height: 100vh;
     background: linear-gradient(180deg, #4e73df 0%, #224abe 100%);
     color: white;
@@ -13,181 +31,151 @@
     transition: all 0.3s;
     display: flex;
     flex-direction: column;
-    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
 }
 
 .sidebar.collapsed {
-    width: 70px;
-}
-
-.sidebar.collapsed .sidebar-header span,
-.sidebar.collapsed .nav-link span,
-.sidebar.collapsed .nav-link {
-    font-size: 0;
-}
-
-.sidebar.collapsed .nav-link i {
-    font-size: 1.2rem;
-    margin: 0;
+    width: 60px;
 }
 
 .sidebar-header {
-    padding: 20px;
+    padding: 15px;
     text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .sidebar-header i {
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .sidebar-header span {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 700;
-    margin-left: 10px;
+}
+
+.sidebar .nav {
+    padding: 10px 0;
+    flex: 1;
 }
 
 .sidebar .nav-link {
-    color: rgba(255, 255, 255, 0.8);
-    padding: 12px 20px;
-    font-size: 0.9rem;
-    transition: all 0.3s;
+    color: rgba(255,255,255,0.85);
+    padding: 10px 15px;
+    font-size: 0.85rem;
+    transition: all 0.2s;
     border-left: 3px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .sidebar .nav-link:hover {
     color: white;
-    background: rgba(255, 255, 255, 0.1);
-    border-left-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255,255,255,0.1);
 }
 
 .sidebar .nav-link.active {
     color: white;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255,255,255,0.15);
     border-left-color: white;
     font-weight: 600;
 }
 
 .sidebar .nav-link i {
-    width: 25px;
-    margin-right: 10px;
+    width: 20px;
     text-align: center;
+    font-size: 0.9rem;
 }
 
 /* Main Content */
 .main-content {
-    margin-left: 250px;
+    margin-left: var(--sidebar-width);
     min-height: 100vh;
     transition: all 0.3s;
 }
 
-.sidebar.collapsed + .main-content {
-    margin-left: 70px;
+.sidebar.collapsed ~ .main-content {
+    margin-left: 60px;
 }
 
 /* Top Navbar */
 .top-navbar {
-    height: 60px;
+    height: 50px;
     background: white;
     border-bottom: 1px solid #e3e6f0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 15px;
     position: sticky;
     top: 0;
     z-index: 999;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .top-navbar h4 {
     color: #333;
     font-weight: 600;
+    font-size: 1rem;
+    margin: 0;
 }
 
-.avatar-img {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--primary);
-}
-
-/* KPI Cards */
+/* KPI Cards Compactos */
 .kpi-card {
     background: white;
-    border-radius: 12px;
-    padding: 25px;
+    border-radius: 8px;
+    padding: 15px;
     display: flex;
     align-items: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    transition: transform 0.2s;
     border-left: 4px solid;
+    height: 100%;
 }
 
 .kpi-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
 }
 
-.kpi-total {
-    border-left-color: #4e73df;
-}
-
-.kpi-abiertos {
-    border-left-color: #e74a3b;
-}
-
-.kpi-proceso {
-    border-left-color: #f6c23e;
-}
-
-.kpi-cerrados {
-    border-left-color: #1cc88a;
-}
+.kpi-total { border-left-color: #4e73df; }
+.kpi-abiertos { border-left-color: #e74a3b; }
+.kpi-proceso { border-left-color: #f6c23e; }
+.kpi-cerrados { border-left-color: #1cc88a; }
 
 .kpi-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
+    width: 45px;
+    height: 45px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 15px;
-    font-size: 1.5rem;
+    margin-right: 12px;
+    font-size: 1.1rem;
+    flex-shrink: 0;
 }
 
-.kpi-total .kpi-icon {
-    background: rgba(78, 115, 223, 0.1);
-    color: #4e73df;
-}
-
-.kpi-abiertos .kpi-icon {
-    background: rgba(231, 74, 59, 0.1);
-    color: #e74a3b;
-}
-
-.kpi-proceso .kpi-icon {
-    background: rgba(246, 194, 62, 0.1);
-    color: #f6c23e;
-}
-
-.kpi-cerrados .kpi-icon {
-    background: rgba(28, 200, 138, 0.1);
-    color: #1cc88a;
-}
+.kpi-total .kpi-icon { background: rgba(78,115,223,0.1); color: #4e73df; }
+.kpi-abiertos .kpi-icon { background: rgba(231,74,59,0.1); color: #e74a3b; }
+.kpi-proceso .kpi-icon { background: rgba(246,194,62,0.1); color: #f6c23e; }
+.kpi-cerrados .kpi-icon { background: rgba(28,200,138,0.1); color: #1cc88a; }
 
 .kpi-info h3 {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     font-weight: 700;
     margin: 0;
     color: #333;
+    line-height: 1;
 }
 
 .kpi-info p {
-    margin: 0;
+    margin: 3px 0 0;
     color: #888;
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -197,19 +185,86 @@
     height: 100%;
 }
 
+.chart-card .card-header {
+    padding: 10px 15px;
+    background: white;
+    border-bottom: 1px solid #e3e6f0;
+}
+
+.chart-card .card-header h5 {
+    font-size: 0.9rem;
+    margin: 0;
+    color: #4e73df;
+}
+
 .chart-card .card-body {
-    padding: 20px;
+    padding: 15px;
 }
 
-/* Report KPI Cards */
-.kpi-card-report {
-    border-radius: 12px;
-    transition: all 0.3s;
+.chart-card canvas {
+    max-height: 250px;
 }
 
-.kpi-card-report:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+/* Cards generales */
+.card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    margin-bottom: 15px;
+}
+
+.card-header {
+    background: white;
+    border-bottom: 1px solid #e3e6f0;
+    padding: 10px 15px;
+    border-radius: 8px 8px 0 0 !important;
+}
+
+.card-header h5 {
+    margin: 0;
+    color: #4e73df;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Tablas */
+.table {
+    font-size: 0.85rem;
+    margin-bottom: 0;
+}
+
+.table th {
+    background-color: #f8f9fc;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    padding: 8px 12px;
+}
+
+.table td {
+    padding: 8px 12px;
+    vertical-align: middle;
+}
+
+/* Badges */
+.badge-critica { background-color: #e74a3b; color: white; }
+.badge-alta { background-color: #f6c23e; color: #333; }
+.badge-media { background-color: #36b9cc; color: white; }
+.badge-baja { background-color: #1cc88a; color: white; }
+.badge-abierto { background-color: #e74a3b; color: white; }
+.badge-en_proceso { background-color: #f6c23e; color: #333; }
+.badge-resuelto { background-color: #1cc88a; color: white; }
+.badge-cerrado { background-color: #858796; color: white; }
+
+/* Botones */
+.btn {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+}
+
+.btn-primary {
+    background-color: #4e73df;
+    border-color: #4e73df;
 }
 
 /* Responsive */
@@ -217,20 +272,34 @@
     .sidebar {
         transform: translateX(-100%);
     }
-
     .sidebar.active {
         transform: translateX(0);
     }
-
     .main-content {
         margin-left: 0 !important;
     }
-
     .kpi-card {
-        padding: 15px;
+        padding: 10px;
     }
-
     .kpi-info h3 {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
     }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Toast notifications */
+.toast-container {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 9999;
 }
